@@ -10,8 +10,48 @@ API de productos con Node.js, Express y MySQL.
 4. Ejecutar `npm run dev` para desarrollar o `npm start` para iniciar.
 5. Consultar `GET http://localhost:3000/`: debe responder con estado 200 y JSON.
 
-La conexión con MySQL y los endpoints de productos todavía están pendientes.
+Los endpoints de productos todavía están pendientes.
 El servidor base puede iniciarse sin una base de datos configurada.
+
+## Base de datos con XAMPP
+
+1. Iniciar el módulo **MySQL** en el panel de XAMPP.
+2. Importar `database/schema.sql` desde phpMyAdmin. Para usar phpMyAdmin,
+   iniciar también Apache y visitar `http://localhost/phpmyadmin`.
+3. Completar `DB_USER` y `DB_PASSWORD` en `.env` con los datos de tu instalación.
+4. Ejecutar `npm run db:check` para comprobar la conexión y la tabla.
+
+También se puede importar desde PowerShell, sin iniciar Apache:
+
+```powershell
+Get-Content database/schema.sql | & C:\xampp\mysql\bin\mysql.exe -h 127.0.0.1 -P 3306 -u root -p
+```
+
+El comando solicita la contraseña; si tu instalación local no tiene una,
+presionar Enter. Nunca escribir contraseñas dentro de los archivos SQL.
+
+XAMPP incluye MariaDB, que se utiliza en esta práctica mediante `mysql2/promise`.
+El pool de `src/config/db.js` toma las credenciales de `.env` y permite hasta
+10 conexiones. La tabla tiene `id`, `nombre`, `descripcion`, `precio`, `stock`
+y `creado_en`; los importes y las existencias no pueden ser negativos.
+
+El script SQL crea los objetos si no existen y no elimina registros.
+
+## Herramientas verificadas
+
+- Node.js 22.14.0 y npm 10.9.2.
+- Git y Visual Studio Code, con ESLint y Prettier.
+- Postman instalado para las futuras pruebas de la API.
+- XAMPP en `C:\xampp`, con MariaDB 10.4.32 en el puerto 3306.
+- Dependencias Express, mysql2, cors y dotenv instaladas.
+
+No es necesario instalar Insomnia o Thunder Client si se utiliza Postman.
+
+Durante la preparación, MariaDB no iniciaba debido a un índice dañado de
+`mysql.proxies_priv`. Se respaldaron sus tres archivos en
+`C:\xampp\mysql\repair-backups\20261105-100602` y se reconstruyó el índice
+con `REPAIR TABLE mysql.proxies_priv USE_FRM` en modo sin conexiones de red.
+La comprobación posterior `CHECK TABLE mysql.proxies_priv` devolvió `OK`.
 
 ## Organización
 
