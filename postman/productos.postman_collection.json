@@ -1,0 +1,319 @@
+{
+  "info": {
+    "name": "Práctica 10 - API de productos",
+    "description": "Ejecutar en orden. Crea un producto temporal, verifica los cuatro verbos y lo elimina. No contiene credenciales de MySQL.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "productoId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "01 - Comprobar servidor",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/",
+        "description": "01 - Comprobar servidor. Respuesta esperada: 200."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Estado 200', () => pm.response.to.have.status(200));",
+              "pm.test('Respuesta JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 - Crear producto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/productos",
+        "description": "02 - Crear producto. Respuesta esperada: 201.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Cuaderno de práctica\",\n  \"descripcion\": \"Producto temporal de Postman\",\n  \"precio\": 12.5,\n  \"stock\": 10\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Estado 201', () => pm.response.to.have.status(201));",
+              "pm.test('Respuesta JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));",
+              "pm.test('Esquema de respuesta', () => pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"id\",\"nombre\",\"descripcion\",\"precio\",\"stock\"],\"properties\":{\"id\":{\"type\":\"integer\",\"minimum\":1},\"nombre\":{\"type\":\"string\"},\"descripcion\":{\"type\":[\"string\",\"null\"]},\"precio\":{\"type\":\"string\",\"pattern\":\"^\\\\d+\\\\.\\\\d{2}$\"},\"stock\":{\"type\":\"integer\",\"minimum\":0}}}));",
+              "if (pm.response.code === 201) pm.collectionVariables.set('productoId', pm.response.json().id);",
+              "pm.test('Location del producto', () => pm.expect(pm.response.headers.get('Location')).to.eql('/api/productos/' + pm.response.json().id));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 - Listar productos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/productos",
+        "description": "03 - Listar productos. Respuesta esperada: 200."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Estado 200', () => pm.response.to.have.status(200));",
+              "pm.test('Respuesta JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));",
+              "pm.test('Esquema de respuesta', () => pm.response.to.have.jsonSchema({\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"id\",\"nombre\",\"descripcion\",\"precio\",\"stock\"],\"properties\":{\"id\":{\"type\":\"integer\",\"minimum\":1},\"nombre\":{\"type\":\"string\"},\"descripcion\":{\"type\":[\"string\",\"null\"]},\"precio\":{\"type\":\"string\",\"pattern\":\"^\\\\d+\\\\.\\\\d{2}$\"},\"stock\":{\"type\":\"integer\",\"minimum\":0}}}}));",
+              "pm.test('Incluye el producto creado', () => pm.expect(pm.response.json().some(p => p.id === Number(pm.collectionVariables.get('productoId')))).to.eql(true));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 - Consultar producto",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/productos/{{productoId}}",
+        "description": "04 - Consultar producto. Respuesta esperada: 200."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Estado 200', () => pm.response.to.have.status(200));",
+              "pm.test('Respuesta JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));",
+              "pm.test('Esquema de respuesta', () => pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"id\",\"nombre\",\"descripcion\",\"precio\",\"stock\"],\"properties\":{\"id\":{\"type\":\"integer\",\"minimum\":1},\"nombre\":{\"type\":\"string\"},\"descripcion\":{\"type\":[\"string\",\"null\"]},\"precio\":{\"type\":\"string\",\"pattern\":\"^\\\\d+\\\\.\\\\d{2}$\"},\"stock\":{\"type\":\"integer\",\"minimum\":0}}}));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 - Actualizar producto",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/productos/{{productoId}}",
+        "description": "05 - Actualizar producto. Respuesta esperada: 200.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Cuaderno actualizado\",\n  \"descripcion\": null,\n  \"precio\": 15.9,\n  \"stock\": 5\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Estado 200', () => pm.response.to.have.status(200));",
+              "pm.test('Respuesta JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));",
+              "pm.test('Esquema de respuesta', () => pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"id\",\"nombre\",\"descripcion\",\"precio\",\"stock\"],\"properties\":{\"id\":{\"type\":\"integer\",\"minimum\":1},\"nombre\":{\"type\":\"string\"},\"descripcion\":{\"type\":[\"string\",\"null\"]},\"precio\":{\"type\":\"string\",\"pattern\":\"^\\\\d+\\\\.\\\\d{2}$\"},\"stock\":{\"type\":\"integer\",\"minimum\":0}}}));",
+              "pm.test('Datos actualizados', () => { const p = pm.response.json(); pm.expect(p.nombre).to.eql('Cuaderno actualizado'); pm.expect(p.precio).to.eql('15.90'); pm.expect(p.stock).to.eql(5); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 - Rechazar precio negativo",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/productos",
+        "description": "06 - Rechazar precio negativo. Respuesta esperada: 400.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Cuaderno de práctica\",\n  \"descripcion\": \"Producto temporal de Postman\",\n  \"precio\": -1,\n  \"stock\": 10\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Estado 400', () => pm.response.to.have.status(400));",
+              "pm.test('Respuesta JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));",
+              "pm.test('Error sin detalles internos', () => { const body = pm.response.json(); pm.expect(Object.keys(body)).to.eql(['error']); pm.expect(body.error).to.be.a('string'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 - Rechazar id inválido",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/productos/abc",
+        "description": "07 - Rechazar id inválido. Respuesta esperada: 400."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Estado 400', () => pm.response.to.have.status(400));",
+              "pm.test('Respuesta JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));",
+              "pm.test('Error sin detalles internos', () => { const body = pm.response.json(); pm.expect(Object.keys(body)).to.eql(['error']); pm.expect(body.error).to.be.a('string'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 - Eliminar producto",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/api/productos/{{productoId}}",
+        "description": "08 - Eliminar producto. Respuesta esperada: 200."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Estado 200', () => pm.response.to.have.status(200));",
+              "pm.test('Respuesta JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "09 - Consultar producto eliminado",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/productos/{{productoId}}",
+        "description": "09 - Consultar producto eliminado. Respuesta esperada: 404."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Estado 404', () => pm.response.to.have.status(404));",
+              "pm.test('Respuesta JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));",
+              "pm.test('Error sin detalles internos', () => { const body = pm.response.json(); pm.expect(Object.keys(body)).to.eql(['error']); pm.expect(body.error).to.be.a('string'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "10 - Actualizar producto eliminado",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/productos/{{productoId}}",
+        "description": "10 - Actualizar producto eliminado. Respuesta esperada: 404.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Cuaderno de práctica\",\n  \"descripcion\": \"Producto temporal de Postman\",\n  \"precio\": 12.5,\n  \"stock\": 10\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Estado 404', () => pm.response.to.have.status(404));",
+              "pm.test('Respuesta JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));",
+              "pm.test('Error sin detalles internos', () => { const body = pm.response.json(); pm.expect(Object.keys(body)).to.eql(['error']); pm.expect(body.error).to.be.a('string'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "11 - Eliminar otra vez",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/api/productos/{{productoId}}",
+        "description": "11 - Eliminar otra vez. Respuesta esperada: 404."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Estado 404', () => pm.response.to.have.status(404));",
+              "pm.test('Respuesta JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));",
+              "pm.test('Error sin detalles internos', () => { const body = pm.response.json(); pm.expect(Object.keys(body)).to.eql(['error']); pm.expect(body.error).to.be.a('string'); });"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,650 @@
+{
+  "fecha": "2026-11-05T15:17:13.975Z",
+  "nota": "Respuestas HTTP reales de la suite. Solo los fallos 500 se simulan sustituyendo temporalmente pool.execute; MySQL no se detiene.",
+  "solicitudes": [
+    {
+      "metodo": "GET",
+      "ruta": "/",
+      "esperado": 200,
+      "estado": 200,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "mensaje": "API de productos en funcionamiento"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 201,
+      "estado": 201,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "id": 5,
+        "nombre": "Prueba de la práctica",
+        "descripcion": "Registro temporal",
+        "precio": "12.50",
+        "stock": 3
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/api/productos",
+      "esperado": 200,
+      "estado": 200,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": [
+        {
+          "id": 5,
+          "nombre": "Prueba de la práctica",
+          "descripcion": "Registro temporal",
+          "precio": "12.50",
+          "stock": 3,
+          "creado_en": "2026-11-05T15:17:13.000Z"
+        }
+      ]
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/api/productos/5",
+      "esperado": 200,
+      "estado": 200,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "id": 5,
+        "nombre": "Prueba de la práctica",
+        "descripcion": "Registro temporal",
+        "precio": "12.50",
+        "stock": 3,
+        "creado_en": "2026-11-05T15:17:13.000Z"
+      }
+    },
+    {
+      "metodo": "PUT",
+      "ruta": "/api/productos/5",
+      "esperado": 200,
+      "estado": 200,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "id": 5,
+        "nombre": "Producto actualizado",
+        "descripcion": null,
+        "precio": "25.99",
+        "stock": 0
+      }
+    },
+    {
+      "metodo": "PUT",
+      "ruta": "/api/productos/5",
+      "esperado": 200,
+      "estado": 200,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "id": 5,
+        "nombre": "Producto actualizado",
+        "descripcion": null,
+        "precio": "25.99",
+        "stock": 0
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/api/productos/5",
+      "esperado": 200,
+      "estado": 200,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "id": 5,
+        "nombre": "Producto actualizado",
+        "descripcion": null,
+        "precio": "25.99",
+        "stock": 0,
+        "creado_en": "2026-11-05T15:17:13.000Z"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El cuerpo de la solicitud contiene JSON inválido"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "Envía un objeto JSON con los datos del producto"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El nombre es obligatorio y debe tener entre 1 y 100 caracteres"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El nombre es obligatorio y debe tener entre 1 y 100 caracteres"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El nombre es obligatorio y debe tener entre 1 y 100 caracteres"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El precio debe ser un número entre 0 y 99999999.99 con hasta dos decimales"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El precio debe ser un número entre 0 y 99999999.99 con hasta dos decimales"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El precio debe ser un número entre 0 y 99999999.99 con hasta dos decimales"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El precio debe ser un número entre 0 y 99999999.99 con hasta dos decimales"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El precio debe ser un número entre 0 y 99999999.99 con hasta dos decimales"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El precio debe ser un número entre 0 y 99999999.99 con hasta dos decimales"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El stock debe ser un entero entre 0 y 2147483647"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El stock debe ser un entero entre 0 y 2147483647"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El stock debe ser un entero entre 0 y 2147483647"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "La descripción debe ser texto de hasta 65535 bytes o null"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "La descripción debe ser texto de hasta 65535 bytes o null"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "Solo se permiten nombre, descripcion, precio y stock"
+      }
+    },
+    {
+      "metodo": "PUT",
+      "ruta": "/api/productos/5",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El precio debe ser un número entre 0 y 99999999.99 con hasta dos decimales"
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/api/productos/5",
+      "esperado": 200,
+      "estado": 200,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "id": 5,
+        "nombre": "Producto actualizado",
+        "descripcion": null,
+        "precio": "25.99",
+        "stock": 0,
+        "creado_en": "2026-11-05T15:17:13.000Z"
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/api/productos/0",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "PUT",
+      "ruta": "/api/productos/0",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "DELETE",
+      "ruta": "/api/productos/0",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/api/productos/-1",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "PUT",
+      "ruta": "/api/productos/-1",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "DELETE",
+      "ruta": "/api/productos/-1",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/api/productos/1.5",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "PUT",
+      "ruta": "/api/productos/1.5",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "DELETE",
+      "ruta": "/api/productos/1.5",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/api/productos/abc",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "PUT",
+      "ruta": "/api/productos/abc",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "DELETE",
+      "ruta": "/api/productos/abc",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/api/productos/4294967296",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "PUT",
+      "ruta": "/api/productos/4294967296",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "DELETE",
+      "ruta": "/api/productos/4294967296",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/api/productos/1%20OR%201=1",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "PUT",
+      "ruta": "/api/productos/1%20OR%201=1",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "DELETE",
+      "ruta": "/api/productos/1%20OR%201=1",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El id debe ser un entero entre 1 y 4294967295"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "estado": 400,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El cuerpo de la solicitud contiene JSON inválido"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 415,
+      "estado": 415,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "Usa Content-Type: application/json"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 415,
+      "estado": 415,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "Usa Content-Type: application/json"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 413,
+      "estado": 413,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "El cuerpo de la solicitud supera el límite de 100 KB"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 201,
+      "estado": 201,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "id": 6,
+        "nombre": "Prueba '); DROP TABLE productos; --",
+        "descripcion": null,
+        "precio": "0.00",
+        "stock": 0
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/api/productos/6",
+      "esperado": 200,
+      "estado": 200,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "id": 6,
+        "nombre": "Prueba '); DROP TABLE productos; --",
+        "descripcion": null,
+        "precio": "0.00",
+        "stock": 0,
+        "creado_en": "2026-11-05T15:17:13.000Z"
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/no-existe",
+      "esperado": 404,
+      "estado": 404,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "Ruta no encontrada"
+      }
+    },
+    {
+      "metodo": "DELETE",
+      "ruta": "/api/productos/5",
+      "esperado": 200,
+      "estado": 200,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "mensaje": "Producto eliminado",
+        "id": 5
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/api/productos/5",
+      "esperado": 404,
+      "estado": 404,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "Producto no encontrado"
+      }
+    },
+    {
+      "metodo": "PUT",
+      "ruta": "/api/productos/5",
+      "esperado": 404,
+      "estado": 404,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "Producto no encontrado"
+      }
+    },
+    {
+      "metodo": "DELETE",
+      "ruta": "/api/productos/5",
+      "esperado": 404,
+      "estado": 404,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "Producto no encontrado"
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/api/productos",
+      "esperado": 500,
+      "estado": 500,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "No se pudo completar la operación"
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/api/productos/5",
+      "esperado": 500,
+      "estado": 500,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "No se pudo completar la operación"
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 500,
+      "estado": 500,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "No se pudo completar la operación"
+      }
+    },
+    {
+      "metodo": "PUT",
+      "ruta": "/api/productos/5",
+      "esperado": 500,
+      "estado": 500,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "No se pudo completar la operación"
+      }
+    },
+    {
+      "metodo": "DELETE",
+      "ruta": "/api/productos/5",
+      "esperado": 500,
+      "estado": 500,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "No se pudo completar la operación"
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "info": {
+    "name": "Práctica 10 - Error 500 controlado",
+    "description": "Ejecutar npm run demo:error en otra terminal. Usa una instancia separada en 3001 sin detener MySQL ni modificar datos.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "errorBaseUrl",
+      "value": "http://127.0.0.1:3001"
+    }
+  ],
+  "item": [
+    {
+      "name": "Error 500 por conexión no disponible",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{errorBaseUrl}}/api/productos",
+        "description": "Error 500 por conexión no disponible. Respuesta esperada: 500."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Estado 500', () => pm.response.to.have.status(500));",
+              "pm.test('Respuesta JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));",
+              "pm.test('Error sin detalles internos', () => { const body = pm.response.json(); pm.expect(Object.keys(body)).to.eql(['error']); pm.expect(body.error).to.be.a('string'); });"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
