@@ -2,6 +2,24 @@
 
 API de productos con Node.js, Express y MySQL.
 
+## Interfaz para la demostración
+
+Con MySQL de XAMPP iniciado, ejecutar `npm start` y abrir
+**[http://localhost:3000/productos](http://localhost:3000/productos)**.
+
+La interfaz permite registrar productos mediante un formulario, buscar en el
+catálogo, editar datos y eliminar con confirmación. También muestra el total de
+productos, las unidades y el valor del inventario en soles.
+Los cambios se guardan en MySQL mediante la misma API REST y permanecen al recargar.
+No requiere instalar dependencias adicionales ni iniciar otro servidor.
+
+Para presentar: escribir nombre, precio, stock y una descripción opcional;
+pulsar **Guardar producto** y mostrar el registro en la tabla. Recargar la página
+demuestra que el producto permanece en la base de datos. Los datos pueden editarse
+desde el icono de lápiz. La papelera solicita confirmar antes de eliminarlos.
+
+La captura de la interfaz está en [docs/capturas/interfaz-productos.png](docs/capturas/interfaz-productos.png).
+
 ## Preparación
 
 1. Instalar Node.js 20 o superior y MySQL.
@@ -102,6 +120,7 @@ La comprobación posterior `CHECK TABLE mysql.proxies_priv` devolvió `OK`.
 - `src/routes`: rutas de productos.
 - `src/app.js`: aplicación y configuración de Express.
 - `src/server.js`: carga del entorno e inicio del servidor.
+- `public`: interfaz HTML, estilos y JavaScript que consume la API.
 
 ## Avances completados
 
@@ -110,6 +129,7 @@ La comprobación posterior `CHECK TABLE mysql.proxies_priv` devolvió `OK`.
 3. Listado y creación con GET y POST.
 4. Consulta por ID, PUT, DELETE, validaciones y errores JSON.
 5. Documentación, colecciones de Postman y pruebas automatizadas.
+6. Interfaz de inventario conectada a MySQL, registro desde navegador y comprobación de persistencia.
 
 Cada avance tendrá un commit con una oración corta en primera persona.
 

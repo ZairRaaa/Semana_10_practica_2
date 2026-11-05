@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172a46">
+  <title>Productos · Almacén</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%232c63e8'/%3E%3Cpath d='M10 14l10-5 10 5v13l-10 5-10-5zM10 14l10 5 10-5M20 19v13' fill='none' stroke='white' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+  <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="box" viewBox="0 0 24 24"><path d="m12 3 9 4.5v9L12 21l-9-4.5v-9L12 3Z M3 7.5l9 4.5 9-4.5M12 12v9M7.5 5.25l9 4.5"/></symbol>
+    <symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="search-icon" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+    <symbol id="refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M6 7a7 7 0 0 1 12-1l2 3M4 15l2 3a7 7 0 0 0 12-1"/></symbol>
+    <symbol id="edit" viewBox="0 0 24 24"><path d="m15 5 4 4M4 20l5-1L20 8a2.8 2.8 0 0 0-4-4L5 15l-1 5Z"/></symbol>
+    <symbol id="trash" viewBox="0 0 24 24"><path d="M3 6h18M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7"/></symbol>
+    <symbol id="layers" viewBox="0 0 24 24"><path d="m12 3 10 5-10 5L2 8l10-5ZM2 12l10 5 10-5M2 16l10 5 10-5"/></symbol>
+    <symbol id="coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 8h-4a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4H9M12 6v12"/></symbol>
+  </svg>
+  <aside class="sidebar">
+    <a class="brand" href="/productos"><span class="brand-icon"><svg><use href="#box"/></svg></span>almacén<span class="brand-dot">.</span></a>
+    <p class="nav-label">ESPACIO DE TRABAJO</p>
+    <a class="nav-link" href="/productos" aria-current="page"><svg><use href="#box"/></svg>Productos<span class="nav-mark"></span></a>
+    <div class="sidebar-bottom"><span class="course-icon">10</span><div><strong>Práctica de laboratorio</strong><span>Desarrollo de Aplicaciones Web</span></div></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><span>Mi inventario <span class="breadcrumb">/</span> <strong>Productos</strong></span><span class="connection" id="connection"><i></i>Conectando…</span></header>
+    <main>
+      <div class="page-heading"><div><p class="eyebrow">CONTROL DE INVENTARIO</p><h1>Todo en su lugar.</h1><p class="intro">Registra tus productos y mantén tu inventario al día.</p></div><button class="button primary" id="new-product"><svg><use href="#plus"/></svg>Nuevo producto</button></div>
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+      <section class="metrics" aria-label="Resumen del inventario">
+        <article class="metric"><div><span>Productos registrados</span><strong id="total-products">—</strong><small>En tu catálogo</small></div><span class="metric-icon blue"><svg><use href="#box"/></svg></span></article>
+        <article class="metric"><div><span>Unidades disponibles</span><strong id="total-stock">—</strong><small>Existencias totales</small></div><span class="metric-icon teal"><svg><use href="#layers"/></svg></span></article>
+        <article class="metric"><div><span>Valor del inventario</span><strong id="total-value">—</strong><small>Precio × unidades</small></div><span class="metric-icon amber"><svg><use href="#coin"/></svg></span></article>
+      </section>
+      <div class="content-grid">
+        <section class="panel catalogue" aria-labelledby="catalogue-title">
+          <div class="panel-heading"><div><h2 id="catalogue-title">Tu catálogo <span id="product-count" class="count">0</span></h2><p>Los productos que hacen crecer tu inventario.</p></div><button id="reload" class="icon-button" aria-label="Actualizar lista" title="Actualizar lista"><svg><use href="#refresh"/></svg></button></div>
+          <div class="search-wrap"><svg><use href="#search-icon"/></svg><input type="search" id="search" placeholder="Buscar por nombre o descripción…" aria-label="Buscar productos"></div>
+          <div class="table-wrap"><table><thead><tr><th>Producto</th><th>Precio</th><th>Stock</th><th><span class="sr-only">Acciones</span></th></tr></thead><tbody id="product-list"></tbody></table></div>
+          <div id="empty" class="empty"><span class="empty-icon"><svg><use href="#box"/></svg></span><h3 id="empty-title">Cargando tu inventario…</h3><p id="empty-text">Un momento, estamos consultando tus productos.</p></div>
+          <footer class="catalogue-footer"><span id="list-caption">Consultando productos…</span><span>Precios en soles · PEN</span></footer>
+        </section>
+        <section class="panel form-panel" aria-labelledby="form-title">
+          <div class="panel-heading"><div><span class="form-eyebrow" id="form-eyebrow">AÑADIR AL CATÁLOGO</span><h2 id="form-title">Nuevo producto</h2><p id="form-description">Completa los datos para registrarlo.</p></div><span class="form-icon"><svg><use href="#plus"/></svg></span></div>
+          <form id="product-form">
+            <fieldset id="product-fields">
+              <label for="nombre">Nombre del producto <span>*</span></label><input id="nombre" name="nombre" maxlength="100" required placeholder="Ej. Cuaderno universitario" autocomplete="off">
+              <label for="descripcion">Descripción <small>Opcional</small></label><textarea id="descripcion" name="descripcion" rows="3" placeholder="Agrega una breve descripción…"></textarea>
+              <div class="form-row"><div><label for="precio">Precio <span>*</span></label><div class="input-prefix"><span>S/</span><input id="precio" name="precio" type="number" min="0" max="99999999.99" step="0.01" required placeholder="0.00"></div></div><div><label for="stock">Stock <span>*</span></label><input id="stock" name="stock" type="number" min="0" max="2147483647" step="1" required placeholder="0"></div></div>
+              <p class="form-hint">Los campos con <span>*</span> son obligatorios.</p>
+              <button class="button primary submit-button" type="submit" id="save-product"><svg><use href="#plus"/></svg><span id="save-label">Guardar producto</span></button>
+              <button class="button secondary cancel-button" id="cancel-edit" type="button" hidden>Cancelar edición</button>
+            </fieldset>
+          </form>
+          <div class="form-note"><span class="note-dot"></span>Tu producto se guardará en la base de datos.</div>
+        </section>
+      </div>
+      <footer class="page-footer"><span>Almacén · Gestión de productos</span><span>Práctica 10 / Desarrollo Web</span></footer>
+    </main>
+  </div>
+  <template id="product-row"><tr><td><div class="product-cell"><span class="product-avatar"><svg><use href="#box"/></svg></span><div><strong class="product-name"></strong><span class="product-description"></span></div></div></td><td class="product-price"></td><td><span class="stock-badge"></span></td><td><div class="row-actions"><button class="icon-button edit-product" type="button"><svg><use href="#edit"/></svg></button><button class="icon-button delete-product" type="button"><svg><use href="#trash"/></svg></button></div></td></tr></template>
+  <dialog id="delete-dialog" aria-labelledby="delete-title"><span class="delete-icon"><svg><use href="#trash"/></svg></span><h2 id="delete-title">¿Eliminar producto?</h2><p id="delete-description"></p><p class="dialog-hint">Esta acción elimina el producto del inventario.</p><div class="dialog-actions"><button class="button secondary" id="cancel-delete" autofocus>Cancelar</button><button class="button danger" id="confirm-delete">Eliminar producto</button></div></dialog>
+</body>
+</html>

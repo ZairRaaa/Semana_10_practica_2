@@ -33,8 +33,8 @@ El producto creado para la captura 201 se eliminó después de obtenerla.
 
 ## Resultados verificados
 
-- `npm test`: 11 casos dentro de una prueba principal; Node informa 12 pruebas,
-  todas aprobadas. Se registraron 60 respuestas HTTP sin estados inesperados
+- `npm test`: 12 casos dentro de una prueba principal; Node informa 13 pruebas,
+  todas aprobadas. Se registraron 62 respuestas HTTP sin estados inesperados
   en [evidencias-http.json](evidencias-http.json).
 - Newman, colección de productos: 11 solicitudes y 34 aserciones; 0 fallos.
 - Newman, colección de error 500: 1 solicitud y 3 aserciones; 0 fallos.
@@ -57,3 +57,13 @@ Los avances de esta sesión están en commits locales; se publican con
 La implementación se completó con asistencia de IA por solicitud del estudiante.
 La autoría manual exigida por la guía debe acreditarse de acuerdo con las
 indicaciones del docente; estas evidencias no prueban ese requisito.
+
+## Interfaz de productos
+
+![Interfaz con un producto registrado y el formulario de alta](capturas/interfaz-productos.png)
+
+Página local: `http://localhost:3000/productos`.
+Se registró un Cuaderno universitario desde el formulario y se comprobó que
+permaneciera al recargar. También se verificaron la edición del precio, la búsqueda
+sin coincidencias y la cancelación del diálogo de eliminación.
+El producto de demostración permanece en la base de datos local.

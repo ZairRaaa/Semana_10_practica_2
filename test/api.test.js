@@ -36,6 +36,21 @@ test('API de productos con MySQL real', async (t) => {
   }
 
   try {
+    await t.test('la interfaz y sus recursos se sirven sin exponer archivos privados', async () => {
+      const page = await fetch(baseUrl + '/productos');
+      assert.equal(page.status, 200);
+      assert.match(page.headers.get('content-type'), /text\/html/);
+      const html = await page.text();
+      assert.match(html, /id="product-form"/);
+      const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
+      assert.equal(new Set(ids).size, ids.length, 'Los identificadores HTML deben ser únicos');
+      for (const resource of ['/assets/styles.css', '/assets/app.js']) {
+        const response = await fetch(baseUrl + resource);
+        assert.equal(response.status, 200);
+      }
+      await request('GET', '/assets/.env', 404);
+      await request('GET', '/assets/..%2f.env', 404);
+    });
     await t.test('salud del servidor en JSON', async () => {
       await request('GET', '/', 200);
     });

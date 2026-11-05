@@ -1,7 +1,27 @@
 {
-  "fecha": "2026-11-05T15:17:13.975Z",
+  "fecha": "2026-11-05T15:46:25.895Z",
   "nota": "Respuestas HTTP reales de la suite. Solo los fallos 500 se simulan sustituyendo temporalmente pool.execute; MySQL no se detiene.",
   "solicitudes": [
+    {
+      "metodo": "GET",
+      "ruta": "/assets/.env",
+      "esperado": 404,
+      "estado": 404,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "Ruta no encontrada"
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/assets/..%2f.env",
+      "esperado": 404,
+      "estado": 404,
+      "contentType": "application/json; charset=utf-8",
+      "respuesta": {
+        "error": "Ruta no encontrada"
+      }
+    },
     {
       "metodo": "GET",
       "ruta": "/",
@@ -19,7 +39,7 @@
       "estado": 201,
       "contentType": "application/json; charset=utf-8",
       "respuesta": {
-        "id": 5,
+        "id": 15,
         "nombre": "Prueba de la práctica",
         "descripcion": "Registro temporal",
         "precio": "12.50",
@@ -34,38 +54,54 @@
       "contentType": "application/json; charset=utf-8",
       "respuesta": [
         {
-          "id": 5,
+          "id": 13,
+          "nombre": "Cuaderno universitario",
+          "descripcion": "Cuaderno de 100 hojas para la práctica",
+          "precio": "12.50",
+          "stock": 10,
+          "creado_en": "2026-11-05T15:42:51.000Z"
+        },
+        {
+          "id": 14,
+          "nombre": "Libro",
+          "descripcion": "UNCP",
+          "precio": "12.00",
+          "stock": 2,
+          "creado_en": "2026-11-05T15:45:42.000Z"
+        },
+        {
+          "id": 15,
           "nombre": "Prueba de la práctica",
           "descripcion": "Registro temporal",
           "precio": "12.50",
           "stock": 3,
-          "creado_en": "2026-11-05T15:17:13.000Z"
+          "creado_en": "2026-11-05T15:46:25.000Z"
         }
       ]
     },
     {
       "metodo": "GET",
-      "ruta": "/api/productos/5",
+      "ruta": "/api/productos/15",
       "esperado": 200,
       "estado": 200,
       "contentType": "application/json; charset=utf-8",
       "respuesta": {
-        "id": 5,
+        "id": 15,
         "nombre": "Prueba de la práctica",
         "descripcion": "Registro temporal",
         "precio": "12.50",
         "stock": 3,
-        "creado_en": "2026-11-05T15:17:13.000Z"
+        "creado_en": "2026-11-05T15:46:25.000Z"
       }
     },
     {
       "metodo": "PUT",
-      "ruta": "/api/productos/5",
+      "ruta": "/api/productos/15",
       "esperado": 200,
       "estado": 200,
       "contentType": "application/json; charset=utf-8",
       "respuesta": {
-        "id": 5,
+        "id": 15,
         "nombre": "Producto actualizado",
         "descripcion": null,
         "precio": "25.99",
@@ -74,12 +110,12 @@
     },
     {
       "metodo": "PUT",
-      "ruta": "/api/productos/5",
+      "ruta": "/api/productos/15",
       "esperado": 200,
       "estado": 200,
       "contentType": "application/json; charset=utf-8",
       "respuesta": {
-        "id": 5,
+        "id": 15,
         "nombre": "Producto actualizado",
         "descripcion": null,
         "precio": "25.99",
@@ -88,17 +124,17 @@
     },
     {
       "metodo": "GET",
-      "ruta": "/api/productos/5",
+      "ruta": "/api/productos/15",
       "esperado": 200,
       "estado": 200,
       "contentType": "application/json; charset=utf-8",
       "respuesta": {
-        "id": 5,
+        "id": 15,
         "nombre": "Producto actualizado",
         "descripcion": null,
         "precio": "25.99",
         "stock": 0,
-        "creado_en": "2026-11-05T15:17:13.000Z"
+        "creado_en": "2026-11-05T15:46:25.000Z"
       }
     },
     {
@@ -273,7 +309,7 @@
     },
     {
       "metodo": "PUT",
-      "ruta": "/api/productos/5",
+      "ruta": "/api/productos/15",
       "esperado": 400,
       "estado": 400,
       "contentType": "application/json; charset=utf-8",
@@ -283,17 +319,17 @@
     },
     {
       "metodo": "GET",
-      "ruta": "/api/productos/5",
+      "ruta": "/api/productos/15",
       "esperado": 200,
       "estado": 200,
       "contentType": "application/json; charset=utf-8",
       "respuesta": {
-        "id": 5,
+        "id": 15,
         "nombre": "Producto actualizado",
         "descripcion": null,
         "precio": "25.99",
         "stock": 0,
-        "creado_en": "2026-11-05T15:17:13.000Z"
+        "creado_en": "2026-11-05T15:46:25.000Z"
       }
     },
     {
@@ -523,7 +559,7 @@
       "estado": 201,
       "contentType": "application/json; charset=utf-8",
       "respuesta": {
-        "id": 6,
+        "id": 16,
         "nombre": "Prueba '); DROP TABLE productos; --",
         "descripcion": null,
         "precio": "0.00",
@@ -532,17 +568,17 @@
     },
     {
       "metodo": "GET",
-      "ruta": "/api/productos/6",
+      "ruta": "/api/productos/16",
       "esperado": 200,
       "estado": 200,
       "contentType": "application/json; charset=utf-8",
       "respuesta": {
-        "id": 6,
+        "id": 16,
         "nombre": "Prueba '); DROP TABLE productos; --",
         "descripcion": null,
         "precio": "0.00",
         "stock": 0,
-        "creado_en": "2026-11-05T15:17:13.000Z"
+        "creado_en": "2026-11-05T15:46:25.000Z"
       }
     },
     {
@@ -557,18 +593,18 @@
     },
     {
       "metodo": "DELETE",
-      "ruta": "/api/productos/5",
+      "ruta": "/api/productos/15",
       "esperado": 200,
       "estado": 200,
       "contentType": "application/json; charset=utf-8",
       "respuesta": {
         "mensaje": "Producto eliminado",
-        "id": 5
+        "id": 15
       }
     },
     {
       "metodo": "GET",
-      "ruta": "/api/productos/5",
+      "ruta": "/api/productos/15",
       "esperado": 404,
       "estado": 404,
       "contentType": "application/json; charset=utf-8",
@@ -578,7 +614,7 @@
     },
     {
       "metodo": "PUT",
-      "ruta": "/api/productos/5",
+      "ruta": "/api/productos/15",
       "esperado": 404,
       "estado": 404,
       "contentType": "application/json; charset=utf-8",
@@ -588,7 +624,7 @@
     },
     {
       "metodo": "DELETE",
-      "ruta": "/api/productos/5",
+      "ruta": "/api/productos/15",
       "esperado": 404,
       "estado": 404,
       "contentType": "application/json; charset=utf-8",
@@ -608,7 +644,7 @@
     },
     {
       "metodo": "GET",
-      "ruta": "/api/productos/5",
+      "ruta": "/api/productos/15",
       "esperado": 500,
       "estado": 500,
       "contentType": "application/json; charset=utf-8",
@@ -628,7 +664,7 @@
     },
     {
       "metodo": "PUT",
-      "ruta": "/api/productos/5",
+      "ruta": "/api/productos/15",
       "esperado": 500,
       "estado": 500,
       "contentType": "application/json; charset=utf-8",
@@ -638,7 +674,7 @@
     },
     {
       "metodo": "DELETE",
-      "ruta": "/api/productos/5",
+      "ruta": "/api/productos/15",
       "esperado": 500,
       "estado": 500,
       "contentType": "application/json; charset=utf-8",

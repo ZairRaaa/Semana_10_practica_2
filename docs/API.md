@@ -1,7 +1,8 @@
 # API de productos
 
 Servidor local: `http://localhost:3000`. Base: `db_lab10`.
-Todas las respuestas de la aplicación se devuelven como JSON.
+Las respuestas de la API se devuelven como JSON.
+La interfaz HTML está en `/productos` y sus archivos estáticos en `/assets`.
 
 ## Endpoints
 
@@ -82,12 +83,14 @@ disponibles en esa modalidad; los archivos JSON quedan listos para importar.
 
 ## Verificación automatizada
 
-`npm test` ejecuta 11 casos dentro de una prueba principal. Comprueba
+`npm test` ejecuta 12 casos dentro de una prueba principal. Comprueba
 persistencia real, cuatro verbos HTTP, actualizaciones repetidas, límites,
 identificadores inválidos, JSON, Content-Type, eliminación y respuestas de error.
 La prueba 500 sustituye temporalmente `pool.execute` para simular un fallo:
 no detiene MySQL. Los demás casos se ejecutan contra la base configurada en `.env`.
 La suite abre un puerto HTTP disponible y elimina únicamente sus propios registros.
+También verifica que la interfaz y sus recursos se sirvan correctamente, que sus
+identificadores HTML sean únicos y que `.env` no sea accesible desde los recursos públicos.
 
 Para volver a registrar las respuestas como evidencia desde PowerShell:
 
